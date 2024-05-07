@@ -1,386 +1,28 @@
-var minersAddr = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C';
-var minersAbi = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "ceoAddress",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getBalance",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "initialized",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "rt",
-				"type": "uint256"
-			},
-			{
-				"name": "rs",
-				"type": "uint256"
-			},
-			{
-				"name": "bs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateTrade",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "contractBalance",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuy",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "marketEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "sellEggs",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "devFee",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "seedMarket",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "hatchEggs",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getMyEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "lastHatch",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "claimedEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "EGGS_TO_HATCH_1MINERS",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "hatcheryMiners",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuySimple",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eggs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggSell",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "referrals",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "ceoAddress2",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getMyMiners",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "adr",
-				"type": "address"
-			}
-		],
-		"name": "getEggsSinceLastHatch",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "buyEggs",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	}
-]
-var minersContract;
+// JavaScript para interactuar con el contrato y actualizar la interfaz HTML
 
-var canSell = true;
-var canHatch = true;
+// Web3 initialization
+if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+} else {
+    // Set the provider you want from Web3.providers
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
 
+// Obtener la instancia del contrato
+var contractABI = []; // Aquí colocarás el ABI de tu contrato
+var contractAddress = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C'; // Dirección del contrato
+var minersContract = new web3.eth.Contract(contractABI, contractAddress);
 
+// Función para obtener el saldo del contrato
 function contractBalance(callback){
-    web3.eth.getBalance(minersAddr).then(result => {
+    web3.eth.getBalance(contractAddress).then(result => {
         callback(web3.utils.fromWei(result));
     }).catch((err) => {
         console.log(err)
     });
 }
 
+// Función para comprar huevos
 function buyEggs(ref, trx, callback){
     minersContract.methods.buyEggs(ref).send({value: trx, from: currentAddr}).then(result => {
         callback();
@@ -389,38 +31,25 @@ function buyEggs(ref, trx, callback){
     });
 }
 
+// Función para incubar huevos
 function hatchEggs(ref, callback){
-    if (canHatch) {
-        canHatch = false;
-        minersContract.methods.hatchEggs(ref).send({from: currentAddr}).then(result => {
-            callback();
-        }).catch((err) => {
-            console.log(err)
-        });
-        setTimeout(function(){
-            canHatch = true;
-        }, 10000);
-    } else {
-        console.log('Cannot hatch yet...')
-    }
+    minersContract.methods.hatchEggs(ref).send({from: currentAddr}).then(result => {
+        callback();
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
+// Función para vender huevos
 function sellEggs(callback){
-    if (canSell) {
-        canSell = false;
-        minersContract.methods.sellEggs().send({from: currentAddr}).then(result => {
-            callback();
-        }).catch((err) => {
-            console.log(err)
-        });
-        setTimeout(function(){
-            canSell = true;
-        }, 10000);
-    } else {
-        console.log('Cannot sell yet...')
-    }
+    minersContract.methods.sellEggs().send({from: currentAddr}).then(result => {
+        callback();
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
+// Función para calcular la cantidad de BNB que se necesita para comprar huevos
 function calculateEggBuy(trx, contractBalance, callback){
     minersContract.methods.calculateEggBuy(trx, contractBalance).call().then(result => {
         callback(result);
@@ -429,6 +58,7 @@ function calculateEggBuy(trx, contractBalance, callback){
     });
 }
 
+// Función para calcular la cantidad de huevos que se pueden comprar con una cantidad específica de BNB
 function calculateEggBuySimple(trx, callback){
     minersContract.methods.calculateEggBuySimple(trx).call().then(result => {
         callback(result);
@@ -437,6 +67,7 @@ function calculateEggBuySimple(trx, callback){
     });
 }
 
+// Función para calcular la cantidad de BNB que se puede obtener al vender huevos
 function calculateEggSell(eggs, callback){
     minersContract.methods.calculateEggSell(eggs).call().then(result => {
         callback(result);
@@ -445,6 +76,7 @@ function calculateEggSell(eggs, callback){
     });
 }
 
+// Función para obtener la cantidad de huevos reclamados
 function claimedEggs(callback){
     minersContract.methods.claimedEggs().call().then(result => {
         callback(result);
@@ -453,6 +85,7 @@ function claimedEggs(callback){
     });
 }
 
+// Función para obtener la comisión del desarrollador
 function devFee(amount, callback){
     minersContract.methods.devFee(amount).call().then(result => {
         callback(result);
@@ -461,6 +94,7 @@ function devFee(amount, callback){
     });
 }
 
+// Función para obtener el saldo del usuario
 function getBalance(callback){
     minersContract.methods.getBalance().call().then(result => {
         callback(result);
@@ -469,6 +103,7 @@ function getBalance(callback){
     });
 }
 
+// Función para obtener la cantidad de huevos generados desde el último proceso de incubación
 function getEggsSinceLastHatch(address, callback){
     minersContract.methods.getEggsSinceLastHatch(address).call().then(result => {
         callback(result);
@@ -477,6 +112,7 @@ function getEggsSinceLastHatch(address, callback){
     });
 }
 
+// Función para obtener la cantidad de huevos del usuario
 function getMyEggs(callback){
     minersContract.methods.getMyEggs().call({from: currentAddr}).then(result => {
         callback(result);
@@ -485,6 +121,7 @@ function getMyEggs(callback){
     });
 }
 
+// Función para obtener la cantidad de "mineros" del usuario
 function getMyMiners(callback){
     minersContract.methods.getMyMiners().call({from: currentAddr}).then(result => {
         if (result == '0x') {
@@ -496,6 +133,7 @@ function getMyMiners(callback){
     });
 }
 
+// Función para obtener la última incubación del usuario
 function lastHatch(address, callback){
     minersContract.methods.lastHatch(address).call({from: currentAddr}).then(result => {
         callback(result);
@@ -504,6 +142,7 @@ function lastHatch(address, callback){
     });
 }
 
+// Función para obtener la cantidad de huevos en el mercado
 function marketEggs(callback){
     minersContract.methods.marketEggs().call().then(result => {
         callback(result);
