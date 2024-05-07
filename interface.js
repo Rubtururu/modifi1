@@ -1,513 +1,75 @@
-var minersAddr = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C';
-var minersAbi = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "ceoAddress",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getBalance",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "initialized",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "rt",
-				"type": "uint256"
-			},
-			{
-				"name": "rs",
-				"type": "uint256"
-			},
-			{
-				"name": "bs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateTrade",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "contractBalance",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuy",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "marketEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "sellEggs",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "devFee",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "seedMarket",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "hatchEggs",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getMyEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "lastHatch",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "claimedEggs",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "EGGS_TO_HATCH_1MINERS",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "hatcheryMiners",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggBuySimple",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "eggs",
-				"type": "uint256"
-			}
-		],
-		"name": "calculateEggSell",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "referrals",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "ceoAddress2",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getMyMiners",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "adr",
-				"type": "address"
-			}
-		],
-		"name": "getEggsSinceLastHatch",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "ref",
-				"type": "address"
-			}
-		],
-		"name": "buyEggs",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	}
-]
-var minersContract;
+var web3 = new Web3(Web3.givenProvider);
+var minersContract = new web3.eth.Contract(minersAbi, minersAddr);
+var currentAddr = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C';
 
-var canSell = true;
-var canHatch = true;
-
-
-function contractBalance(callback){
-    web3.eth.getBalance(minersAddr).then(result => {
-        callback(web3.utils.fromWei(result));
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function buyEggs(ref, trx, callback){
-    minersContract.methods.buyEggs(ref).send({value: trx, from: currentAddr}).then(result => {
-        callback();
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function hatchEggs(ref, callback){
-    if (canHatch) {
-        canHatch = false;
-        minersContract.methods.hatchEggs(ref).send({from: currentAddr}).then(result => {
-            callback();
-        }).catch((err) => {
-            console.log(err)
-        });
-        setTimeout(function(){
-            canHatch = true;
-        }, 10000);
+$(document).ready(function () {
+    // Comprobar si Web3 está inyectado por el navegador (Mist/MetaMask)
+    if (typeof web3 !== 'undefined') {
+        // Usar el proveedor de MetaMask
+        web3 = new Web3(web3.currentProvider);
+        console.log('Usando el proveedor de MetaMask');
     } else {
-        console.log('Cannot hatch yet...')
+        console.log('No se detectó web3. Volviendo a http://localhost:8545.');
+        // Volver a localhost si no hay inyección de web3
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
     }
-}
 
-function sellEggs(callback){
-    if (canSell) {
-        canSell = false;
-        minersContract.methods.sellEggs().send({from: currentAddr}).then(result => {
-            callback();
-        }).catch((err) => {
-            console.log(err)
-        });
-        setTimeout(function(){
-            canSell = true;
-        }, 10000);
-    } else {
-        console.log('Cannot sell yet...')
-    }
-}
-
-function calculateEggBuy(trx, contractBalance, callback){
-    minersContract.methods.calculateEggBuy(trx, contractBalance).call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function calculateEggBuySimple(trx, callback){
-    minersContract.methods.calculateEggBuySimple(trx).call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function calculateEggSell(eggs, callback){
-    minersContract.methods.calculateEggSell(eggs).call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function claimedEggs(callback){
-    minersContract.methods.claimedEggs().call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function devFee(amount, callback){
-    minersContract.methods.devFee(amount).call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function getBalance(callback){
-    minersContract.methods.getBalance().call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function getEggsSinceLastHatch(address, callback){
-    minersContract.methods.getEggsSinceLastHatch(address).call().then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function getMyEggs(callback){
-    minersContract.methods.getMyEggs().call({from: currentAddr}).then(result => {
-        callback(result);
-    }).catch((err) => {
-        console.log(err)
-    });
-}
-
-function getMyMiners(callback){
-    minersContract.methods.getMyMiners().call({from: currentAddr}).then(result => {
-        if (result == '0x') {
-            result = 0;
+    // Obtener la dirección del usuario actual
+    web3.eth.getAccounts(function (err, accounts) {
+        if (err != null) {
+            console.error("Ocurrió un error: " + err);
+        } else if (accounts.length === 0) {
+            console.log("El usuario no ha iniciado sesión en MetaMask");
+        } else {
+            currentAddr = accounts[0];
+            console.log("Dirección actual: " + currentAddr);
         }
+    });
+
+    // Actualizar estadísticas cada 10 segundos
+    updateStats();
+});
+
+function updateStats() {
+    // Actualizar estadísticas
+    getMyEggs(function (eggs) {
+        $('#eggs').text(eggs);
+    });
+
+    getMyMiners(function (miners) {
+        $('#miners').text(miners);
+    });
+
+    lastHatch(currentAddr, function (lastHatchTime) {
+        var timeSinceLastHatch = Math.floor(Date.now() / 1000) - lastHatchTime;
+        var timeToHatch = parseInt($('#EGGS_TO_HATCH_1MINERS').text()) * timeSinceLastHatch;
+        $('#time_to_hatch').text(timeToHatch);
+    });
+
+    // Actualizar estadísticas cada 10 segundos
+    setTimeout(updateStats, 10000);
+}
+
+function getMyEggs(callback) {
+    minersContract.methods.getMyEggs().call({ from: currentAddr }).then(function (result) {
         callback(result);
-    }).catch((err) => {
-        console.log(err)
+    }).catch(function (err) {
+        console.log(err);
     });
 }
 
-function lastHatch(address, callback){
-    minersContract.methods.lastHatch(address).call({from: currentAddr}).then(result => {
+function getMyMiners(callback) {
+    minersContract.methods.getMyMiners().call({ from: currentAddr }).then(function (result) {
         callback(result);
-    }).catch((err) => {
-        console.log(err)
+    }).catch(function (err) {
+        console.log(err);
     });
 }
 
-function marketEggs(callback){
-    minersContract.methods.marketEggs().call().then(result => {
+function lastHatch(address, callback) {
+    minersContract.methods.lastHatch(address).call({ from: currentAddr }).then(function (result) {
         callback(result);
-    }).catch((err) => {
-        console.log(err)
+    }).catch(function (err) {
+        console.log(err);
     });
 }
