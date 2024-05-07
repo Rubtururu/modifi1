@@ -1,0 +1,413 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Title, Favicon -->
+		<title>CryptoEGG FARM</title>
+		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="theme_bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="theme_animista.css">
+		<link rel="stylesheet" type="text/css" href="theme_snailtree.css">		
+	</head>
+	
+	<body>
+		<!-- TITLE STUFF -->
+		<div class="container" align="center">
+			<img height="160" src="img/cryptoegg_logo.png">
+			<h1 class="black-shadow">CRYPTOEGG 2.0 FARM GAME on the Blockchain</h1>
+			<a href="#info"><img height="64" src="img/question_circle.png"></a>
+			<a href="https://bscscan.com/address/0x298d4bd0904d1c79d57879d834fbb7025f8c28c2" target="_blank"><img height="64" src="img/contract_circle.png"></a>
+			<a href="https://cryptoegg.xyz" target="_blank"><img height="64" src="img/twitter_circle.png"></a>
+			<a href="https://cryptoegg.xyz/index.htm" target="_blank"><img height="64" src="img/medium_circle.png"></a>
+			<a href="https://t.me/cryptoegg_official" target="_blank"><img height="64" src="img/telegram_circle.png"></a>
+		</div><br>
+		<!-- PROGRESS BAR -->
+		<div class="container" align="center">
+			<div class="container-social">
+				<h1 class="black-shadow">ROUND <span id="gameround">?</span></h1>
+			</div><br>
+			<h2 class="black-shadow pulse-text">SELL EGGs #<span id="pecantowin">?</span> TO WIN <span id="roundpot">?</span> BNB</h2><br>
+			
+			<div class="progress" style="height: 40px;">
+				<div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" id="progressbarpecan"><h5>0%</h5></div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm" align="left">
+					<h3 class="black-shadow"><span id="pecangiven">?</span> EGGs SOLD
+				</h3></div>
+				<div class="col-sm" align="right">
+					<h3 class="black-shadow"><span id="pecanleft">?</span> EGGs Left
+				</h3></div>
+			</div>
+		</div>
+		<!-- WONKERS WINDOW -->
+		<div class="container wonkers-container" align="center">
+			<img src="img/squirrel_crazy.png"><br><br>
+			<button class="btn btn-lg btn-success" onclick="webCheckRoot(webCheckPecan)">SELL EGG</button><br><br>
+			<div class="row">
+				<div class="col-sm">
+					<h4 class="black-shadow">You have <span id="playerpecan">?</span> Eggs</h4>
+				</div>
+				<div class="col-sm">
+					<h4 class="black-shadow">Trade <input type="text" id="fieldPecan" value="1000000" size="8"> Eggss</h4>
+					<button class="btn-success" onclick="maxField()">Max</button>
+				</div>
+				<div class="col-sm">
+					<h4 class="black-shadow">Receive <span id="tradereward">?</span> BNB</h4>
+				</div>
+			</div>
+			<br>
+		</div>
+		<div class="container" align="center">
+			<h2 class="black-shadow">BUY MOTHER EGG TO GET <span id="rootpecanforoneether">?</span> EGGS PER BNB</h2><br>
+		</div>
+		<!-- TREE WINDOW. SHOW STATS, BIG FONT -->	
+		<div class="jumbotron"><br>
+			<div class="row">
+				<div class="col-sm-4" align="center">
+					<img class="wobble-hor-bottom" src="img/ethertree.gif" height="256">
+				</div>
+				<div class="col-sm-8">
+					<h2 class="black-shadow" align="center"><span id="playertree">?</span> MotherEGG Size | Upgrade Boost <span id="playerboost">?</span>x</h2><br>
+					<h2>BNB Share: <span id="playerethershare">?</span> BNB</h2><br>
+					<h2>Eggs Reward: <span id="playerpecanshare">?</span></h2><br>
+					<h2>Last Claimed: <span id="playerlastclaim">?</span></h2><br>
+				</div>
+			</div>
+		</div>
+		<!-- TREE ACTIONS. PLANT, Upgrade, CLAIM -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm" align="center">
+					<div class="container-beige">
+						<button class="btn btn-lg btn-success" onclick="webCheckClaim()">MOTHER EGG</button>
+					</div>
+					<h5 class="black-shadow">Spend <input type="text" id="fieldRoot" value="0.02" size="3"> BNB
+					<h5 class="black-shadow">Get <span id="fieldpecanreward">?</span> Eggs
+				</h5></h5></div>
+				<div class="col-sm" align="center">
+					<div class="container-beige">
+						<button class="btn btn-lg btn-success" onclick="webCheckRoot(webCheckTime)">Upgrade MOTHER EGG</button>
+					</div>
+					<h5 class="black-shadow">Use BNBs Share to Upgrade Size</h5>
+					<span id="boostready"><h5 class="black-shadow">Adds Boost once per hour</h5></span>
+				</div>
+				<div class="col-sm" align="center">
+					<div class="container-beige">
+						<button class="btn btn-lg btn-success" onclick="webCheckRoot(webHarvestShare)">HARVEST SHARE</button>
+					</div>
+					<h5 class="black-shadow">Get your BNB and Egg rewards
+					<h5 class="black-shadow">Claim before buy any new mother egg!!
+				</h5></h5></div>
+			</div>
+		</div><br><br>
+		<!-- PRELAUNCH MODAL -->
+		<div id="prelaunchmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h1 class="black-shadow">WELCOME!<br>
+				<div class="container-beige">
+					<h3>CryptoEGG FARM is a highlyRisk.</h3><br>
+					<h3>Get 4% of your BNB daily, trade Eggs for more BNB, win the Jackpot for even more BNB!</h3><br>
+					<h3>That's the theory. In truth, it's likely you will lose all your money.</h3>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-lg btn-success" onclick="CloseModal()">Got it!</button>
+				</div>
+			</h1></div>
+		</div>
+		<!-- MODAL. IN CASE PLAYER TRIES TO TRADE TOO MANY EGGS -->
+		<div id="pecanmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h3 class="black-shadow">NOT ENOUGH EGGS</h3><br>
+				<div class="container-beige">
+					<h5>Wonkers doesn't take credit! You cannot trade more eggs than you own.</h5>
+					<h5>If you want to give all your available Eggs, confirm below.</h5>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-success" onclick="CloseModal()">Cancel</button>
+					<button type="button" class="btn btn-success" onclick="webGivePecan()">Give all EGGs</button>
+					<h6>You will receive: <span id="tradereward2">?</span> BNB</h6>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL. IN CASE PLAYER HASN'T CLAIMED BEFORE BUY -->
+		<div id="claimmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h3 class="black-shadow">UNCLAIMED BNB AND EGGS</h3><br>
+				<div class="container-beige">
+					<h5>Buy another mother egg will reset your accumulated BNB and Eggs to 0!</h5>
+					<h5>It's recommended you Upgrade your Mother egg or Claim your Share before buy a new mother egg.</h5>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-success" onclick="CloseModal()">Cancel</button>
+					<button type="button" class="btn btn-success" onclick="webPlantRoot()">BUY MOTHER EGG</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL. FOR Upgrade BEFORE 1 HOUR -->
+		<div id="growmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h3 class="black-shadow">BOOST NOT AVAILABLE</h3><br>
+				<div class="container-beige">
+					<h5>It has been less than 1 Hour since your last MotherEGG action.</h5>
+					<h5>If you Upgrade your MotherEGG now, you will not get an extra Boost!</h5>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-success" onclick="CloseModal()">Cancel</button>
+					<button type="button" class="btn btn-success" onclick="webGrowTree()">Upgrade MotherEGG</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL. IN CASE PLAYER TRIES ANYTHING BEFORE PLANTING A ROOT -->
+		<div id="rootmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h3 class="black-shadow">NO MOTHER</h3><br>
+				<div class="container-beige">
+					<h5>Your Mother Egg cannot Upgrade without roots. Mother Egg</h5>
+					<h5>Spend at least 0.001 BNB to start Invoking Mother Egg!</h5>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-success" onclick="CloseModal()">Got it!</button>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL. IN CASE PLAYER Mother Egg WITH LESS THAN 0.001 BNB -->
+		<div id="toolowmodal" class="modal">
+			<div class="jumbotron modal-content" align="center">
+				<h3 class="black-shadow">NOT ENOUGH BNB</h3><br>
+				<div class="container-beige">
+					<h5>You must use at least 0.001 BNB to Invoke Mother Egg.</h5>
+					<h5>After Invoking Mother Egg, you will be able to Upgrade your MotherEGG with less than 0.001 BNB.</h5>
+				</div>
+				<div class="container" align="center">
+					<button type="button" class="btn btn-success" onclick="CloseModal()">Got it!</button>
+				</div>
+			</div>
+		</div>
+		<!-- EVENT LOG -->
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-sm" align="left">
+					<h3>EVENTS</h3>
+				</div>
+				<div class="col-sm" align="right">
+					<button type="button" class="btn btn-success" onclick="runLog()">Load Event History</button>
+				</div>
+			</div>
+			<div class="container-beige">
+				<div class="scroll-box" id="logboxscroll">
+					<span id="eventlog">Waiting for events...</span>
+				</div>
+			</div>
+			<h3>MotherEGGLORDS</h3>
+			<div class="row">
+				<div class="col-sm">
+					<span id="treelord1">?</span>
+				</div>
+				<div class="col-sm">
+					<span id="treelord2">?</span>
+				</div>
+				<div class="col-sm">
+					<span id="treelord3">?</span>
+				</div>
+				<div class="col-sm">
+					<span id="treelord4">?</span>
+				</div>
+				<div class="col-sm">
+					<span id="treelord5">?</span>
+				</div>
+			</div>
+		</div>
+		<!-- WITHDRAW AND PAY THRONE -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm">
+				<div class="container-beige">
+					<div class="row">
+						<div class="col-sm-8" align="left">
+							<h1><span id="playerbalance">?</span> BNB</h1>
+						</div>
+						<div class="col-sm-4" align="right">
+							<button class="btn btn-lg btn-success" onclick="webWithdrawBalance()">WITHDRAW</button>
+						</div>
+					</div>
+				</div>
+				<h5 class="black-shadow" align="center">Send your BNB to your personal wallet</h5>
+				</div>
+				<div class="col-sm">
+				<div class="container-beige">
+					<div class="row">
+						<div class="col-sm-4" align="left">
+							<button class="btn btn-lg btn-success" onclick="webPayThrone()">SEND CRYPTOEGG</button>
+						</div>
+						<div class="col-sm-8" align="right">
+							<h1><span id="thronepot">?</span> BNB</h1>
+						</div>
+					</div>
+				</div>
+				<h5 class="black-shadow" align="center">Send earn BNB to CryptoEGG Contract holders</h5>
+				</div>
+			</div>
+		</div><br><br>
+		<!-- MISC STATS -->
+		<div class="jumbotron" align="center">
+			<h1 class="black-shadow">Statistics</h1>
+			<div class="container-beige">
+				<h2>Contract Balance: <span id="contractbalance">?</span> BNB</h2><br>
+				<div class="row">
+					<div class="col-sm">
+						<h3>MotherEGGPot: <span id="treepot">?</span> BNB</h3>
+						<h5>The MotherEGGPot consistently pays out according to MotherEGG Size</h5>
+					</div>
+					<div class="col-sm">
+						<h3>WonkPot: <span id="wonkpot">?</span> BNB</h3>
+						<h5>The WonkPot gives out BNB for Eggs</h5>
+					</div>
+					<div class="col-sm">
+						<h3>JackPot: <span id="jackpot">?</span> BNB</h3>
+						<h5>20% of the JackPot is used as Round reward</h5>
+					</div>
+				</div><br>
+				<h2>Last Mother Egg Invoked: <span id="lastrootplant">?</span>
+			</h2></div>
+		</div><br>
+		<!-- COMMUNITY -->
+		<div class="container" align="center">
+			<h1 class="black-shadow">JOIN THE CRYPTOEGG COMMUNITY</h1><br>
+			<div class="row">
+				</div>
+				<div class="col-sm">
+					<a href="https://twitter.com/CryptoEgg_Game" target="_blank"><img height="64" src="img/twitter_circle.png"></a>					
+				</div>
+				<div class="col-sm">
+					<a href="https://t.me/cryptoegg_official" target="_blank"><img height="64" src="img/telegram_circle.png"></a>
+				</div>
+				<div class="col-sm">
+					<a href="https://reddit.com/r/cryptoegg" target="_blank"><img height="64" src="img/reddit_circle.png"></a>
+				</div>
+			</div>
+		</div><br>
+		<!-- GAME INFO -->
+		<div class="jumbotron" align="center">
+			<h1 id="info" class="black-shadow">QUICK START</h1>
+			<div class="container-beige">
+				<br><h3 class="black-shadow"><b>CryptoEGG FARM is a mock HYIP where you invoked Mother EGG for rewards</b>
+				<br></h3><h5><b>It all starts by Mother Egg</b></h5>
+				<h5>In exchange, you get a MotherEGG of a Size proportional to the BNB spent.</h5>
+				<br><h5><b>Buy Mother Egg immediately rewards you with EGGs</b></h5>
+				<h5>The longer anyone goes without Invoking Mother Egg, the bigger Egg reward.</h5>
+				<br><h5><b>Your MotherEGG consistently produces BNB</b></h5>
+				<h5>Based on Size, 4% per day of the BNB value of your MotherEGG.</h5>
+				<br><h5><b>Your MotherEGG also produces EGGs</b></h5>
+				<h5>EGGs are produced slowly at first, then faster the longer you go without Harvesting.</h5>
+				<br><h5><b>Harvest your Share to receive BNB and Eggs</b></h5>
+				<h5>This can be done at any point, and as often as you want. But...</h5>
+				<br><h3 class="black-shadow"><b>The longer you wait, the more Eggs you get!</b>
+				<br></h3><h5><b>Trade Eggs with Wonkers and get BNB</b></h5>
+				<h5>Giving Eggs also raises the shared progress bar.</h5>
+				<br><h5><b>Give the last Egg to win the round</b></h5>
+				<h5>If your gift fills the bar, you win the jackpot!</h5>
+				<br><h5><b>As more MotherEGGs are invoking, Wonkers needs more Eggs</b></h5>
+				<h5>The amount required is in direct proportion with BNB spent on Invoking Mother Egg.</h5>
+				<br><h3 class="black-shadow"><b>Next step: Upgrade your MotherEGG</b>
+				<br></h3><h5><b>Use your Share to Upgrade your MotherEGG</b></h5>
+				<h5>The BNB you would have gotten is reinvested to raise your MotherEGG Size.</h5>
+				<br><h5><b>Increase your Upgrade Boost</b></h5>
+				<h5>For every hour since your last claim, Upgrade your MotherEGG gives you one extra boost up to 10.</h5>
+				<br><h5><b>Your Boost multiplies your Egg claims</b></h5>
+				<h5>Whether from Upgrade MotherEGG or Harvest Share.</h5>
+				<br><h3 class="black-shadow"><b>End of a Round</b>
+				<br></h3><h5><b>After Winter comes Spring</b></h5>
+				<h5>When a player wins the round, the game immediately moves to the next round.</h5>
+				<br><h5><b>MotherEGG get cut, Boosts are reset</b></h5>
+				<h5>On the next action a player takes, MotherEGG Size is reduced by 20% and Boost is reset to 1.</h5>
+				<br><h5><b>CryptoEGG runs forever</b></h5>
+				<h5>The game doesn't stop and will go on indefinitely on the BSC blockchain.</h5><br>
+				<br><h3 class="black-shadow"><b>The CryptoEGG</b>
+				<br></h3><h5>Cryptoegg farm is part of the CryptoEGG ecosystem.</h5>
+				<h5>10% of all BNB invested goes into a pot to pay out CRYPTOEGG contract.</h5>
+				<h5>Anyone can send this pot at any moment.</h5><br>
+				<a href="https://https://cryptoegg.xyz/index.htm" target="_blank"><h4><b>>>> Check out CRYPTOEGG here <<<</b></h4></a>
+			</div>
+			<a href="#top"><img height="48" src="img/arrow_circle.png"></a>
+		</div><br>
+		<!-- BLOCKCHAIN SYNC NOTE -->
+		<div class="container" align="center">
+			<h1 class="black-shadow">IMPORTANT NOTE</h1>
+			<div class="container-beige">
+				<h4><b>The Upgrade BNB and EGG rewards on display are local</b><br>
+				</h4><h5>Due to synchronisation with the blockchain, it's possible for rewards to differ slightly from these displayed values.<br>
+				<h5>If you need to be certain, wait a couple minutes between the displayed rewards you desire and your action.
+			</h5></h5></div>
+		</div><br>
+		<!-- GAME MECHANICS -->
+		<div class="jumbotron">
+			<h1 class="black-shadow" align="center">GAME MECHANICS</h1>
+			<h4><b>Mother Egg</b></h4>
+			<div class="container-beige">
+				<p>Mother Egg gives you 0.0000005 MotherEGG Size per BNB, which translates to a Size of 2 000 for 1 finney, and a Size of 2 000 000 for 1 BNB.</p>
+				<p>The minimum requirement to Mother Egg is 1 finney (0.001 BNB).</p><br>
+				<p>Mother Eggt gives you 1 Egg per MotherEGG Size, multiplied by the global bonus.</p>
+				<p>The global bonus increases by +1% for every second since anyone Mother Egg.</p>
+				<p>For example, buying mother egg with 1 BNB after 1 hour (3600 seconds) would give you: 2MM * (100% + 1% * 3600) = 74MM Eggs.</p><br>
+				<p>Mother Egg forfeits any unclaimed Harvest!</p>
+			</div>
+			<h4><b>Harvest Share</b></h4>
+			<div class="container-beige">
+				<p>Harvest Share transfers unclaimed BNB to the player's ingame balance.</p>
+				<p>BNB rewards accumulate at a rate of 4% of the MotherEGG Size value per day.</p><br>
+				<p>Harvest Share gives 1 Egg per MotherEGG Size per day, multiplied by personal bonus and Boost.</p>
+				<p>The personal bonus starts at 4, and increases by 1 per hour since the player's last MotherEGG action (Invoke, Upgrade or Harvest).</p>
+				<p>The Boost is a fixed multiplier obtained through Upgrade MotherEGG.</p>
+				<p>For example, Harvesting with a MotherEGG Size of 2MM and a Boost of 1 after 1 hour (3600 seconds) would give you: 2MM * 1 * (4 + 1) / 86400 = 416 666 Eggs</p>
+			</div>
+			<h4><b>Upgrade MotherEGG</b></h4>
+			<div class="container-beige">
+				<p>Upgrade MotherEGG uses the BNB share to Upgrade MotherEGG Size at a rate identical to mother egg.</p>
+				<p>The player also receives the same amount of Eggs as for Harvest Share.</p><br>
+				<p>If it has been at least one hour since the player's last MotherEGG action, the player gets a Boost.</p>
+				<p>For each extra hour, the player also gets a Boost, up to a maximum of +10 at once.</p>
+				<p>For example, Upgrade the MotherEGG after 5 hours 30 minutes will give the player +5 Boost.</p>
+			</div>
+			<h4><b>Sell Egg</b></h4>
+			<div class="container-beige">
+				<p>Sell Egg trades as many Eggs as the player wants and sends BNB in return.</p>
+				<p>BNB received is equal to: (Wonkers' Pot) * (Egg Gift) / (Eggs To Win) / 2.</p>
+				<p>No more than 50% of the wonkPot can be won in one gift.</p><br>
+				<p>Eggs from the gift are added to the global Eggs sells variable.</p>
+				<p>If Eggs sells surpass Eggs To Win, the player wins the round.</p>
+				<p>He receives this round's jackpot (20% of the reserve jackpot), and the next round begins.</p>
+			</div>
+			<h4><b>New Round</b></h4>
+			<div class="container-beige">
+				<p>Eggs Sells reset to 0, and Eggs To Win are set according to the jackpot.</p>
+				<p>Eggs to Win = 1 Billion for 0.1 BNB in the Jackpot (or 10MM for 1 finney).</p>
+				<p>Both the jackpot and Eggs to Win change dynamically through the round as players buy mother eggs.</p><br>
+				<p>The first time a player from a previous round takes a MotherEGG action, their Boost is reset to 0.</p>
+				<p>Their MotherEGG Size is also lowered by 20% for every round they've skipped.</p>
+				<p>For example, if we're at Round 3 and a Round 1 player didn't play Round 2, their MotherEGG Size of 4000 will become 4000 * 0.8 * 0.8 = 2560</p><br>
+				<p>Unclaimed share remains available, but in proportion with the new MotherEGG Size.</p>
+				<p>It's best to Harvest before the round ends!</p>
+			</div>
+			<h4><b>Pot Split</b></h4>
+			<div class="container-beige">
+				<p>On every payable transaction, the incoming BNB is split as follows:</p><br>
+				<p>- 40% to the MotherEGGPot, holds payouts from MotherEGG Size</p>
+				<p>- 30% to the wonkPot, reserve for Egg Trades</p>
+				<p>- 20% to the jackPot, 20% of that rewarded to the Round winner</p>
+				<p>- 10% to the CryptoEGGPot, to be sent to CryptoEGG Contract at your convenience</p>
+			</div>
+			<div class="container" align="center">
+				<a href="#top"><img height="48" src="img/arrow_circle.png"></a>
+			</div>
+		</div>
+		<!-- JAVASCRIPT -->
+		<script src="snailtree.js"></script>				
+		<script>
+			initUpdate();
+		</script>		
+	</body>
+</html>
