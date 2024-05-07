@@ -108,6 +108,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
                                     <hr>
@@ -121,106 +123,53 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="well statspanel">
-                                        <h2>Stats Panel</h2>
-                                        <table class="table table-striped">
-                                            <tr>
-                                                <td>Market Price</td>
-                                                <td><span id="marketprice">?</span> BNB</td>
-                                            </tr>
-                                            <tr>
-                                                <td>EGG Supply</td>
-                                                <td><span id="eggsupply">?</span> Eggs</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Your Balance</td>
-                                                <td><span id="mybalance">?</span> BNB</td>
-                                            </tr>
-                                            <tr>
-                                                <td>EGGS to HATCH 1 Miners</td>
-                                                <td><span id="eggstohatch1miners">?</span> Eggs</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Miners Stopped</td>
-                                                <td><span id="minersstopped">?</span> Miners</td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well statspanel">
+                                    <h2>Stats Panel</h2>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>Market Price</td>
+                                            <td><span id="marketprice">?</span> BNB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EGG Supply</td>
+                                            <td><span id="eggsupply">?</span> Eggs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Your Balance</td>
+                                            <td><span id="mybalance">?</span> BNB</td>
+                                        </tr>
+                                        <tr>
+                                            <td>EGGS to HATCH 1 Miners</td>
+                                            <td><span id="eggstohatch1miners">?</span> Eggs</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Miners Stopped</td>
+                                            <td><span id="minersstopped">?</span> Miners</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer>
-                <center>
-                    <p class="small">For support, queries or issues with the game, join our Telegram channel: <a href="https://t.me/cryptoegg_english" target="_blank">https://t.me/cryptoegg_english</a></p>
-                </center>
-            </footer>
         </div>
+        <footer>
+            <center>
+                <p class="small">For support, queries or issues with the game, join our Telegram channel: <a href="https://t.me/cryptoegg_english" target="_blank">https://t.me/cryptoegg_english</a></p>
+            </center>
+        </footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
-    <script>
-        var web3 = new Web3(Web3.givenProvider);
-        var minersContract = new web3.eth.Contract(minersAbi, minersAddr);
-        var currentAddr = '';
-
-        $(document).ready(function () {
-            // Check if Web3 is injected by the browser (Mist/MetaMask)
-            if (typeof web3 !== 'undefined') {
-                // Use MetaMask's provider
-                web3 = new Web3(web3.currentProvider);
-                console.log('Using MetaMask provider');
-            } else {
-                console.log('No web3 detected. Falling back to http://localhost:8545.');
-                // Fallback to localhost if no web3 injection
-                web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-            }
-
-            // Retrieve current user's address
-            web3.eth.getAccounts(function (err, accounts) {
-                if (err != null) {
-                    console.error("An error occurred: " + err);
-                } else if (accounts.length === 0) {
-                    console.log("User is not logged in to MetaMask");
-                } else {
-                    currentAddr = accounts[0];
-                    console.log("Current address: " + currentAddr);
-                }
-            });
-
-            // Call contract functions and update UI
-            updateStats();
-        });
-
-        function updateStats() {
-            // Call contract functions to update UI
-            getBalance(function (balance) {
-                $('#mybalance').text(balance);
-            });
-
-            marketEggs(function (eggs) {
-                $('#eggsupply').text(eggs);
-            });
-
-            getMyMiners(function (miners) {
-                $('#myMiners').text(miners);
-            });
-
-            lastHatch(currentAddr, function (lastHatchTime) {
-                var timeSinceLastHatch = Math.floor(Date.now() / 1000) - lastHatchTime;
-                var timeToHatch = parseInt($('#eggstohatch1miners').text()) * timeSinceLastHatch;
-                $('#minersstopped').text(timeToHatch);
-            });
-
-            // Update stats every 10 seconds
-            setTimeout(updateStats, 10000);
-        }
-    </script>
+    <div class="container">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+        <script src="script.js"></script>
+    </div>
 </body>
 </html>
+
