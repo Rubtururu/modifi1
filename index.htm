@@ -1,73 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Crypto EGG Game</title>
-    <!-- bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="jumbotron-narrow.css" rel="stylesheet">
-    <link href="custom.css" rel="stylesheet">
-    <link href="assets/fonts/fonts.min.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Miner 0001</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <!-- navbar content -->
-        </nav>
-        <div class="jumbotron">
-            <h1>Crypto EGG Game</h1>
-            <p>Deposit BNB to earn more BNB!</p>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Deposit BNB</h2>
-                    <input type="number" id="bnbToDeposit" value="1" step="0.1" />
-                    <button type="button" onclick="deposit()">Deposit</button>
-                </div>
-                <div class="col-md-6">
-                    <h2>Claim Dividends</h2>
-                    <button type="button" onclick="claimDividends()">Claim Dividends</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Withdraw BNB</h2>
-                    <button type="button" onclick="withdraw()">Withdraw</button>
-                </div>
-                <div class="col-md-6">
-                    <h2>Contract Balance</h2>
-                    <p id="contractBalance">?</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Your Balance</h2>
-                    <p id="yourBalance">?</p>
-                </div>
-                <div class="col-md-6">
-                    <h2>Total Deposits</h2>
-                    <p id="totalDeposits">?</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Total Dividends</h2>
-                    <p id="totalDividends">?</p>
-                </div>
-                <div class="col-md-6">
-                    <h2>Total Users</h2>
-                    <p id="totalUsers">?</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- scripts -->
-    <script src="assets/js/web3.min.js"></script>
-    <script src="main.js"></script>
+    <header>
+        <h1>Advanced Miner 0001</h1>
+    </header>
+    <main>
+        <section id="contract-stats">
+            <h2>Contract Statistics</h2>
+            <ul>
+                <li>Contract Balance: <span id="contract-balance">0</span> ETH</li>
+                <li>Total Deposits: <span id="total-deposits">0</span> ETH</li>
+                <li>Total Withdrawals: <span id="total-withdrawals">0</span></li>
+                <li>Total Refunds: <span id="total-refunds">0</span> ETH</li>
+                <li>Total Earnings: <span id="total-earnings">0</span> ETH</li>
+                <li>Total Dividends Claimed: <span id="total-dividends-claimed">0</span> ETH</li>
+            </ul>
+        </section>
+        <section id="user-actions">
+            <h2>User Actions</h2>
+            <form id="deposit-form">
+                <label for="deposit-amount">Deposit Amount (ETH):</label>
+                <input type="number" id="deposit-amount" value="0">
+                <button id="deposit-btn">Deposit</button>
+            </form>
+            <button id="withdraw-btn">Withdraw</button>
+            <button id="claim-dividends-btn">Claim Dividends</button>
+        </section>
+        <section id="user-stats">
+            <h2>User Statistics</h2>
+            <ul>
+                <li>Deposits: <span id="user-deposits">0</span> ETH</li>
+                <li>Last Claimed Timestamp: <span id="last-claimed-timestamp">-</span></li>
+                <li>Available Dividends: <span id="available-dividends">0</span> ETH</li>
+            </ul>
+        </section>
+    </main>
+    <script src="interface.js"></script>
 </body>
 </html>
