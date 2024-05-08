@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Miner 0001</title>
-    <link rel="stylesheet" href="custom.css">
+    <title>My DApp</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Advanced Miner 0001</h1>
-    </header>
-    <main>
-        <section id="contract-stats">
-            <h2>Contract Statistics</h2>
-            <ul>
-                <li>Contract Balance: <span id="contract-balance">0</span> ETH</li>
-                <li>Total Deposits: <span id="total-deposits">0</span> ETH</li>
-                <li>Total Withdrawals: <span id="total-withdrawals">0</span></li>
-                <li>Total Refunds: <span id="total-refunds">0</span> ETH</li>
-                <li>Total Earnings: <span id="total-earnings">0</span> ETH</li>
-                <li>Total Dividends Claimed: <span id="total-dividends-claimed">0</span> ETH</li>
-            </ul>
-        </section>
-        <section id="user-actions">
-            <h2>User Actions</h2>
-            <form id="deposit-form">
-                <label for="deposit-amount">Deposit Amount (ETH):</label>
-                <input type="number" id="deposit-amount" value="0">
-                <button id="deposit-btn">Deposit</button>
-            </form>
-            <button id="withdraw-btn">Withdraw</button>
-            <button id="claim-dividends-btn">Claim Dividends</button>
-        </section>
-        <section id="user-stats">
-            <h2>User Statistics</h2>
-            <ul>
-                <li>Deposits: <span id="user-deposits">0</span> ETH</li>
-                <li>Last Claimed Timestamp: <span id="last-claimed-timestamp">-</span></li>
-                <li>Available Dividends: <span id="available-dividends">0</span> ETH</li>
-            </ul>
-        </section>
-    </main>
+    <div class="container">
+        <h1>My DApp</h1>
+        <button id="connect-wallet-btn" class="btn">Connect Wallet</button>
+        <div class="wallet-info">
+            <div id="user-address" class="wallet-info-item">Address: <span></span></div>
+            <div id="contract-balance" class="wallet-info-item">Contract Balance: <span></span></div>
+        </div>
+        <div class="stats">
+            <div class="stats-item">
+                <h2>Total Deposits:</h2>
+                <span id="total-deposits"></span>
+            </div>
+            <div class="stats-item">
+                <h2>Total Withdrawals:</h2>
+                <span id="total-withdrawals"></span>
+            </div>
+            <div class="stats-item">
+                <h2>Total Earnings:</h2>
+                <span id="total-earnings"></span>
+            </div>
+        </div>
+        <div class="user-stats">
+            <div class="user-stats-item">
+                <h2>Your Deposits:</h2>
+                <span id="user-deposits"></span>
+            </div>
+            <div class="user-stats-item">
+                <h2>Last Claimed Timestamp:</h2>
+                <span id="last-claimed-timestamp"></span>
+            </div>
+            <div class="user-stats-item">
+                <h2>Available Dividends:</h2>
+                <span id="available-dividends"></span>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="deposit-amount">Deposit Amount (ether):</label>
+            <input type="text" id="deposit-amount" name="deposit-amount">
+            <button id="deposit-btn" class="btn">Deposit</button>
+        </div>
+        <div class="input-group">
+            <button id="withdraw-btn" class="btn">Withdraw</button>
+            <button id="claim-dividends-btn" class="btn">Claim Dividends</button>
+        </div>
+    </div>
     <script src="interface.js"></script>
 </body>
 </html>
