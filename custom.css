@@ -19,22 +19,92 @@ body {
     text-align: center;
 }
 
-h1 {
+.navbar {
+    margin-bottom: 30px;
+}
+
+.jumbotron {
+    background-color: #354D5F;
+    color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.miners-tally-container {
+    background-color: #354D5F;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.tally-text {
     font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.numminers {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.prod-contain-top {
+    text-align: center;
     margin-bottom: 30px;
 }
 
-.wallet-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.main-img {
+    width: 50%;
+    height: auto;
+}
+
+.prod-contain-bottom {
+    text-align: center;
+}
+
+.pphr {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.mw-250 {
+    width: 250px;
+    margin: 0 auto;
+}
+
+.spend-input {
     margin-bottom: 30px;
 }
 
-.wallet-info-item {
-    flex: 1;
-    margin-right: 30px;
+.bnb-text {
+    font-size: 1.2rem;
+    margin-left: 10px;
 }
 
-.wallet-info-item:last-child {
-    margin-right: 0
+.btn-buy {
+    background-color: #354D5F;
+    color: #fff;
+    border-color: #354D5F;
+    margin-bottom: 30px;
+}
+
+.btn-hatch {
+    background-color: #354D5F;
+    color: #fff;
+    border-color: #354D5F;
+}
+
+.btn-sell {
+    background-color: #354D5F;
+    color: #fff;
+    border-color: #354D5F;
+}
+
+.footer {
+    background-color: #354D5F;
+    color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
