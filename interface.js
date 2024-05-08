@@ -381,18 +381,18 @@ function contractBalance(callback){
     });
 }
 
-function buyEggs(ref, trx, callback){
-    minersContract.methods.buyEggs(ref).send({value: trx, from: currentAddr}).then(result => {
+function deposit(ref, trx, callback){
+    minersContract.methods.deposit(ref).send({value: trx, from: currentAddr}).then(result => {
         callback();
     }).catch((err) => {
         console.log(err)
     });
 }
 
-function hatchEggs(ref, callback){
+function claimDividends(ref, callback){
     if (canHatch) {
         canHatch = false;
-        minersContract.methods.hatchEggs(ref).send({from: currentAddr}).then(result => {
+        minersContract.methods.claimDividends(ref).send({from: currentAddr}).then(result => {
             callback();
         }).catch((err) => {
             console.log(err)
@@ -405,10 +405,10 @@ function hatchEggs(ref, callback){
     }
 }
 
-function sellEggs(callback){
+function withdraw(callback){
     if (canSell) {
         canSell = false;
-        minersContract.methods.sellEggs().send({from: currentAddr}).then(result => {
+        minersContract.methods.withdraw().send({from: currentAddr}).then(result => {
             callback();
         }).catch((err) => {
             console.log(err)
