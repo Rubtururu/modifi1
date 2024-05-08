@@ -1,80 +1,514 @@
-const web3 = new Web3(new Web3.providers.HttpProvider('https://testnet.bscscan.com'));
-const contractAddress = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C'; // Replace with the actual contract address
-const abi = [[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"DividendsClaimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdrawal","type":"event"},{"inputs":[],"name":"AUTOPAY_PERCENTAGE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"REFUND_PERCENTAGE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"SECONDS_PER_MINUTE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimDividends","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"contractBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"deposits","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserDividends","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"lastClaimedTimestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalDeposits","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalDividends","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalDividendsClaimed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalEarnings","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalRefunds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUsers","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalWithdrawalFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalWithdrawals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]]; // Replace with the actual contract ABI
+var minersAddr = '0xCC103B7Aada3645d0BbDba7012CB95AE4533097C';
+var minersAbi = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ceoAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getBalance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "initialized",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "rt",
+				"type": "uint256"
+			},
+			{
+				"name": "rs",
+				"type": "uint256"
+			},
+			{
+				"name": "bs",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateTrade",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "eth",
+				"type": "uint256"
+			},
+			{
+				"name": "contractBalance",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateEggBuy",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "marketEggs",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "sellEggs",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "devFee",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "seedMarket",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "ref",
+				"type": "address"
+			}
+		],
+		"name": "hatchEggs",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getMyEggs",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "lastHatch",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "claimedEggs",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "EGGS_TO_HATCH_1MINERS",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "hatcheryMiners",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "eth",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateEggBuySimple",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "eggs",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateEggSell",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "referrals",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ceoAddress2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getMyMiners",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "adr",
+				"type": "address"
+			}
+		],
+		"name": "getEggsSinceLastHatch",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "ref",
+				"type": "address"
+			}
+		],
+		"name": "buyEggs",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]
+var minersContract;
 
-let contract;
-let userAddress;
+var canSell = true;
+var canHatch = true;
 
-const connectWalletBtn = document.getElementById('connect-wallet-btn');
-const userAddressDiv = document.getElementById('user-address');
-const contractBalanceDiv = document.getElementById('contract-balance');
-const totalDepositsDiv = document.getElementById('total-deposits');
-const totalWithdrawalsDiv = document.getElementById('total-withdrawals');
-const totalEarningsDiv = document.getElementById('total-earnings');
-const userDepositsDiv = document.getElementById('user-deposits');
-const lastClaimedTimestampDiv = document.getElementById('last-claimed-timestamp');
-const availableDividendsDiv = document.getElementById('available-dividends');
-const depositAmountInput = document.getElementById('deposit-amount');
 
-if (typeof window.ethereum !== 'undefined') {
-    connectWalletBtn.addEventListener('click', connectWallet);
-} else {
-    connectWalletBtn.style.display = 'none';
+function contractBalance(callback){
+    web3.eth.getBalance(minersAddr).then(result => {
+        callback(web3.utils.fromWei(result));
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-async function connectWallet() {
-    try {
-        await window.ethereum.enable();
-        updateUserAddress();
-    } catch (error) {
-        console.error(error);
+function deposit(ref, trx, callback){
+    minersContract.methods.deposit(ref).send({value: trx, from: currentAddr}).then(result => {
+        callback();
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function claimDividends(ref, callback){
+    if (canHatch) {
+        canHatch = false;
+        minersContract.methods.claimDividends(ref).send({from: currentAddr}).then(result => {
+            callback();
+        }).catch((err) => {
+            console.log(err)
+        });
+        setTimeout(function(){
+            canHatch = true;
+        }, 10000);
+    } else {
+        console.log('Cannot hatch yet...')
     }
 }
 
-function updateUserAddress() {
-    userAddress = web3.currentProvider.selectedAddress;
-    userAddressDiv.innerText = userAddress;
-    updateContractStats();
-    updateUserStats();
+function withdraw(callback){
+    if (canSell) {
+        canSell = false;
+        minersContract.methods.withdraw().send({from: currentAddr}).then(result => {
+            callback();
+        }).catch((err) => {
+            console.log(err)
+        });
+        setTimeout(function(){
+            canSell = true;
+        }, 10000);
+    } else {
+        console.log('Cannot sell yet...')
+    }
 }
 
-async function updateContractStats() {
-    contract = new web3.eth.Contract(abi, contractAddress);
-    const contractStats = await contract.methods.getContractStats().call();
-    contractBalanceDiv.innerText = web3.utils.fromWei(contractStats.contractBalance, 'ether');
-    totalDepositsDiv.innerText = web3.utils.fromWei(contractStats.totalDeposits, 'ether');
-    totalWithdrawalsDiv.innerText = contractStats.totalWithdrawals;
-    totalEarningsDiv.innerText = web3.utils.fromWei(contractStats.totalEarnings, 'ether');
+function calculateEggBuy(trx, contractBalance, callback){
+    minersContract.methods.calculateEggBuy(trx, contractBalance).call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-async function updateUserStats() {
-    const userStats = await contract.methods.getUserStats(userAddress).call();
-    userDepositsDiv.innerText = web3.utils.fromWei(userStats.deposits, 'ether');
-    lastClaimedTimestampDiv.innerText = userStats.lastClaimedTimestamp;
-    availableDividendsDiv.innerText = web3.utils.fromWei(userStats.availableDividends, 'ether');
+function calculateEggBuySimple(trx, callback){
+    minersContract.methods.calculateEggBuySimple(trx).call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-async function deposit() {
-    const depositAmount = web3.utils.toWei(depositAmountInput.value, 'ether');
-    await contract.methods.deposit().send({ from: userAddress, value: depositAmount });
-    updateUserStats();
-    updateContractStats();
+function calculateEggSell(eggs, callback){
+    minersContract.methods.calculateEggSell(eggs).call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-document.getElementById('deposit-btn').addEventListener('click', deposit);
-
-async function withdraw() {
-    await contract.methods.withdraw().send({ from: userAddress });
-    updateUserStats();
-    updateContractStats();
+function claimedEggs(callback){
+    minersContract.methods.claimedEggs().call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-document.getElementById('withdraw-btn').addEventListener('click', withdraw);
-
-async function claimDividends() {
-    await contract.methods.claimDividends().send({ from: userAddress });
-    updateUserStats();
-    updateContractStats();
+function devFee(amount, callback){
+    minersContract.methods.devFee(amount).call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
 }
 
-document.getElementById('claim-dividends-btn').addEventListener('click', claimDividends);
+function getBalance(callback){
+    minersContract.methods.getBalance().call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function getEggsSinceLastHatch(address, callback){
+    minersContract.methods.getEggsSinceLastHatch(address).call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function getMyEggs(callback){
+    minersContract.methods.getMyEggs().call({from: currentAddr}).then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function getMyMiners(callback){
+    minersContract.methods.getMyMiners().call({from: currentAddr}).then(result => {
+        if (result == '0x') {
+            result = 0;
+        }
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function lastHatch(address, callback){
+    minersContract.methods.lastHatch(address).call({from: currentAddr}).then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+function marketEggs(callback){
+    minersContract.methods.marketEggs().call().then(result => {
+        callback(result);
+    }).catch((err) => {
+        console.log(err)
+    });
+            }
+                
